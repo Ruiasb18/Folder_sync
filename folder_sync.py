@@ -39,9 +39,13 @@ def sync_folders(source, replica):
                 os.remove(replica_file)
                 logging.info(f"File deleted: {replica_file}")
 
+        source_dir = os.path.join(source, os.path.relpath(dirpath, replica))
         if not os.listdir(dirpath) and dirpath != replica:
-            os.rmdir(dirpath)
-            logging.info(f"Directory removed: {dirpath}")
+            if os.path.exists(source_dir) and not os.listdir(source_dir):
+                pass
+            else:
+                os.rmdir(dirpath)
+                logging.info(f"Directory removed: {dirpath}")
 
 def setup_logging(logfile):
     logging.basicConfig(filename=logfile, level=logging.INFO, format='%(asctime)s - %(message)s')
@@ -70,5 +74,3 @@ def main():
 if __name__ == "__main__":
     main()
 
-
-#Only error found: If a folder is created in "source" with nothing inside, the folder is created in replica but eliminated after
