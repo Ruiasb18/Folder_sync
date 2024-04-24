@@ -5,4 +5,5 @@ python folder_sync.py /path/to/source /path/to/replica --interval 60 --log sync.
 
 /path/to/source: path of the replica folder
 
-60: interval between synchronization
+60: example of interval between synchronization
+ 
